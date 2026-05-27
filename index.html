@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misión Letras en Acción</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky-shapes" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <main class="game-shell">
+    <header class="top-panel">
+      <div class="brand-block">
+        <img src="img/mascota.svg" alt="Mascota Lía, guía de la misión" class="mascot-mini">
+        <div>
+          <p class="eyebrow">Videojuego educativo</p>
+          <h1>Misión Letras en Acción</h1>
+        </div>
+      </div>
+
+      <div class="score-board" aria-label="Marcador del juego">
+        <div><span class="score-label">Nivel</span><strong id="levelCounter">1 / 8</strong></div>
+        <div><span class="score-label">Puntos</span><strong id="scoreCounter">0</strong></div>
+        <div><span class="score-label">Aciertos</span><strong id="successCounter">0</strong></div>
+        <div><span class="score-label">Errores</span><strong id="errorCounter">0</strong></div>
+      </div>
+
+      <div class="progress-wrap" aria-label="Progreso de la misión">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="starsTrack" class="stars-track" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <section id="introScreen" class="screen active">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="badge">Para niños de 8 a 9 años</p>
+          <h2>Ayuda a Lía a completar 8 misiones de lectura y escritura.</h2>
+          <p>Cada partida elige actividades diferentes al azar. Escucha, lee, ordena, escribe y gana estrellas.</p>
+          <form id="playerForm" class="player-form" autocomplete="off">
+            <div class="form-row">
+              <label class="field-group" for="firstNameInput">
+                <span>Nombre</span>
+                <input id="firstNameInput" class="player-input" type="text" inputmode="text" maxlength="30" placeholder="Escribe tu nombre">
+              </label>
+              <label class="field-group" for="lastNameInput">
+                <span>Apellido</span>
+                <input id="lastNameInput" class="player-input" type="text" inputmode="text" maxlength="30" placeholder="Escribe tu apellido">
+              </label>
+            </div>
+            <p id="introError" class="intro-error" role="alert"></p>
+          </form>
+          <button id="startBtn" class="primary-btn big-btn">Iniciar misión</button>
+        </div>
+        <div class="hero-mascot" aria-hidden="true">
+          <img src="img/mascota.svg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div class="mission-card">
+        <aside class="guide-card">
+          <img src="img/mascota.svg" alt="Mascota guía" class="mascot-large">
+          <div class="speech-bubble"><p id="guideText">Lee la misión y elige con calma.</p></div>
+        </aside>
+
+        <section class="activity-area" aria-live="polite">
+          <p id="missionTag" class="mission-tag">Nivel 1</p>
+          <h2 id="missionTitle">Detectives de sonidos</h2>
+          <p id="missionObjective" class="objective-text"></p>
+          <div id="activityContent" class="activity-content"></div>
+          <div id="feedbackBox" class="feedback-box" role="status"></div>
+
+          <div class="action-row">
+            <button id="checkBtn" class="secondary-btn">Comprobar</button>
+            <button id="resetBtn" class="ghost-btn">Reintentar</button>
+            <button id="continueBtn" class="primary-btn" disabled>Continuar</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="resultsScreen" class="screen">
+      <div class="results-panel">
+        <div class="results-header">
+          <img src="img/mascota.svg" alt="Mascota celebrando" class="mascot-result">
+          <div>
+            <p class="badge">Hoja de resultados</p>
+            <h2>¡Misión completada!</h2>
+            <p id="participantName" class="participant-line"></p>
+            <p id="performanceText"></p>
+          </div>
+        </div>
+
+        <div class="total-score">
+          <span>Puntaje total</span>
+          <strong id="finalScore">0 / 80</strong>
+        </div>
+
+        <div class="results-grid">
+          <article>
+            <h3>Resumen por nivel</h3>
+            <div id="levelResults" class="level-results"></div>
+          </article>
+          <article>
+            <h3>Habilidades con dificultad</h3>
+            <ul id="difficultyList" class="plain-list"></ul>
+          </article>
+          <article>
+            <h3>Recomendaciones de refuerzo</h3>
+            <ul id="recommendationList" class="plain-list"></ul>
+          </article>
+        </div>
+
+        <div class="action-row centered">
+          <button id="printBtn" class="secondary-btn">Imprimir resultados</button>
+          <button id="restartBtn" class="primary-btn">Jugar de nuevo</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="celebrationLayer" class="celebration-layer" aria-hidden="true"></div>
+  </main>
+
+  <audio id="successAudio" src="audio/success.wav" preload="auto"></audio>
+  <audio id="errorAudio" src="audio/error.wav" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
