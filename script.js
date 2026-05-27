@@ -144,7 +144,10 @@ const levelBank = [
 ];
 
 function imageOptions(names) {
-  return names.map(name => ({ label: name, image: image: `${slugify(name)}.svg` }));
+  return names.map(name => ({
+    label: name,
+    image: `${slugify(name)}.svg`
+  }));
 }
 
 function slugify(value) {
