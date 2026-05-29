@@ -8,7 +8,7 @@ const levelBank = [
   {
     id: 1,
     title: "Detectives de sonidos",
-    objective: "Evaluar discriminación auditiva y asociación sonido inicial-grafema.",
+    objective: "Objectivo: Evaluar discriminación auditiva y asociación sonido inicial-grafema.",
     type: "image-choice",
     guide: "Busca la imagen que comienza con el sonido indicado.",
     correctMessage: "¡Excelente trabajo! Has encontrado el sonido correcto",
@@ -25,10 +25,10 @@ const levelBank = [
   {
     id: 2,
     title: "Ordena las sílabas",
-    objective: "Organizar sílabas para formar una palabra.",
+    objective: "Objectivo: Organizar sílabas para formar una palabra.",
     type: "syllable-order",
     guide: "Toca todas las sílabas en el orden correcto para formar la palabra.",
-    correctMessage: "¡Muy bien! Has organizado correctamente las sílabas",
+    correctMessage: "¡Muy bien! Has organizado correctamente la silabas para formar la palabra",
     errorMessage: "Revisa nuevamente el orden de las sílabas",
     reinforcements: ["segmentación silábica", "secuenciación auditiva", "planificación escrita"],
     variants: [
@@ -42,7 +42,7 @@ const levelBank = [
   {
     id: 3,
     title: "Palabras intrusas",
-    objective: "Reconocer categorías semánticas e identificar la palabra que no pertenece.",
+    objective: "Objectivo: Reconocer categorías semánticas e identificar la palabra que no pertenece.",
     type: "word-choice",
     guide: "Observa el grupo y encuentra la palabra que no pertenece a la categoría",
     correctMessage: "¡Correcto! Descubriste la palabra que no pertenecía a la categoría",
@@ -59,7 +59,7 @@ const levelBank = [
   {
     id: 4,
     title: "Completa la palabra",
-    objective: "Elegir la letra que completa la palabra",
+    objective: "Objectivo: Elegir la letra que completa la palabra",
     type: "letter-choice",
     guide: "Elige la letra que forma una palabra correcta.",
     correctMessage: "¡Excelente! Has completado correctamente la palabra",
@@ -76,7 +76,7 @@ const levelBank = [
   {
     id: 5,
     title: "El cazador de errores",
-    objective: "Identificar la escritura convencional de una palabra.",
+    objective: "Objectivo: Identificar la escritura convencional de una palabra.",
     type: "word-choice",
     guide: "Elige la palabra que está escrita correctamente.",
     correctMessage: "¡Muy bien! es la escritura correcta",
@@ -93,7 +93,7 @@ const levelBank = [
   {
     id: 6,
     title: "Construye la oración",
-    objective: "Ordena las palabras para formar la oración correcta.",
+    objective: "Objectivo: Ordena las palabras para formar la oración correcta.",
     type: "sentence-order",
     guide: "Toca las palabras y construye una oración correcta.",
     correctMessage: "¡Perfecto! La oración tiene sentido",
@@ -110,7 +110,7 @@ const levelBank = [
   {
     id: 7,
     title: "Lee y escribe",
-    objective: "Lee la oración y contesta la pregunta.",
+    objective: "Objectivo: Lee la oración y contesta la pregunta.",
     type: "reading-input",
     guide: "Lee con atención y escribe la respuesta.",
     correctMessage: "¡Gracias por tu respuesta!",
@@ -127,9 +127,9 @@ const levelBank = [
   {
     id: 8,
     title: "Mini escritor",
-    objective: "Escribir una oración breve relacionada con una imagen.",
+    objective: "Objectivo: Escribir una oración breve relacionada con una imagen.",
     type: "free-writing",
-    guide: "Observa la imagen y escribe una oración completa.",
+    guide: "Observa la imagen y describe una oración de lo que ves.",
     correctMessage: "¡Felicitaciones! Has completado la misión de escritura",
     errorMessage: "Intenta escribir una oración completa sobre la imagen",
     reinforcements: ["producción textual", "planificación escrita", "coherencia", "ortografía funcional"],
