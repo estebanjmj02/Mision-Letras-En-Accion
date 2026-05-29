@@ -12,7 +12,7 @@ const levelBank = [
     type: "image-choice",
     guide: "Busca la imagen que comienza con el sonido indicado.",
     correctMessage: "¡Excelente trabajo! Has encontrado el sonido correcto",
-    errorMessage: "Ups, intenta nuevamente. Escucha con atención el sonido inicial",
+    errorMessage: "Ups, intenta nuevamente.",
     reinforcements: ["discriminación auditiva", "identificación de fonema inicial", "conciencia fonológica"],
     variants: [
       { sound: "/m/", options: imageOptions(["mesa", "sol", "pato", "luna"]), answer: "mesa" },
@@ -25,9 +25,9 @@ const levelBank = [
   {
     id: 2,
     title: "Ordena las sílabas",
-    objective: "Organizar sílabas para formar una palabra con sentido.",
+    objective: "Organizar sílabas para formar una palabra.",
     type: "syllable-order",
-    guide: "Toca todas las sílabas en el orden correcto para formar una sola palabra.",
+    guide: "Toca todas las sílabas en el orden correcto para formar la palabra.",
     correctMessage: "¡Muy bien! Has organizado correctamente las sílabas",
     errorMessage: "Revisa nuevamente el orden de las sílabas",
     reinforcements: ["segmentación silábica", "secuenciación auditiva", "planificación escrita"],
@@ -44,9 +44,9 @@ const levelBank = [
     title: "Palabras intrusas",
     objective: "Reconocer categorías semánticas e identificar la palabra que no pertenece.",
     type: "word-choice",
-    guide: "Observa el grupo y encuentra la palabra intrusa.",
-    correctMessage: "¡Correcto! Descubriste la palabra intrusa",
-    errorMessage: "Observa nuevamente cuáles palabras pertenecen al mismo grupo",
+    guide: "Observa el grupo y encuentra la palabra que no pertenece a la categoría",
+    correctMessage: "¡Correcto! Descubriste la palabra que no pertenecía a la categoría",
+    errorMessage: "Observa nuevamente las palabras",
     reinforcements: ["categorización semántica", "vocabulario", "comprensión verbal"],
     variants: [
       { instruction: "Tres palabras son animales.", options: ["perro", "gato", "mesa", "conejo"], answer: "mesa" },
@@ -59,11 +59,11 @@ const levelBank = [
   {
     id: 4,
     title: "Completa la palabra",
-    objective: "Elegir el grafema que completa una palabra conocida sin ambigüedad.",
+    objective: "Elegir la letra que completa la palabra",
     type: "letter-choice",
-    guide: "Elige la única letra que forma una palabra correcta.",
+    guide: "Elige la letra que forma una palabra correcta.",
     correctMessage: "¡Excelente! Has completado correctamente la palabra",
-    errorMessage: "Intenta nuevamente pensando en el sonido",
+    errorMessage: "Intenta nuevamente",
     reinforcements: ["asociación fonema-grafema", "ortografía natural", "discriminación visual"],
     variants: [
       { template: "SO_", options: ["L", "P", "M"], answer: "L", fullWord: "SOL" },
@@ -79,8 +79,8 @@ const levelBank = [
     objective: "Identificar la escritura convencional de una palabra.",
     type: "word-choice",
     guide: "Elige la palabra que está escrita correctamente.",
-    correctMessage: "¡Muy bien! Has encontrado la palabra correcta",
-    errorMessage: "Revisa nuevamente cómo se escribe la palabra",
+    correctMessage: "¡Muy bien! es la escritura correcta",
+    errorMessage: "Revisa nuevamente la palabra",
     reinforcements: ["ortografía arbitraria", "memoria visual ortográfica", "monitoreo de escritura"],
     variants: [
       { options: ["havion", "avión"], answer: "avión" },
@@ -93,11 +93,11 @@ const levelBank = [
   {
     id: 6,
     title: "Construye la oración",
-    objective: "Ordenar palabras para formar una oración con sentido.",
+    objective: "Ordena las palabras para formar la oración correcta.",
     type: "sentence-order",
-    guide: "Toca las palabras y construye una oración completa.",
+    guide: "Toca las palabras y construye una oración correcta.",
     correctMessage: "¡Perfecto! La oración tiene sentido",
-    errorMessage: "Lee nuevamente las palabras y organiza la idea",
+    errorMessage: "Lee nuevamente las palabras y organiza la oración",
     reinforcements: ["organización sintáctica", "secuencia gramatical", "estructuración escrita"],
     variants: [
       { words: ["juega", "parque", "el", "niño", "en", "el"], answer: "el niño juega en el parque", displayAnswer: "El niño juega en el parque" },
@@ -110,10 +110,10 @@ const levelBank = [
   {
     id: 7,
     title: "Lee y escribe",
-    objective: "Comprender una oración escrita y responder con una palabra clave.",
+    objective: "Lee la oración y contesta la pregunta.",
     type: "reading-input",
     guide: "Lee con atención y escribe la respuesta.",
-    correctMessage: "¡Excelente comprensión!",
+    correctMessage: "¡Gracias por tu respuesta!",
     errorMessage: "Lee nuevamente la oración antes de responder",
     reinforcements: ["comprensión lectora", "evocación escrita", "atención verbal"],
     variants: [
@@ -533,7 +533,10 @@ function checkAnswer() {
     resetBtn.disabled = true;
   } else {
     state.errors += 1;
-    level.reinforcements.forEach(area => state.difficultyAreas.add(area));
+    // Solo registrar áreas de dificultad en niveles con respuesta definida (1-6)
+    if (level.type !== "reading-input" && level.type !== "free-writing") {
+      level.reinforcements.forEach(area => state.difficultyAreas.add(area));
+    }
     showFeedback(level.errorMessage, false);
     playSound("error");
     gameScreen.classList.remove("shake");
@@ -546,10 +549,12 @@ function checkAnswer() {
 }
 
 function validateLevel(level) {
+  // Niveles 7 y 8: cualquier respuesta con contenido es válida
+  if (level.type === "reading-input" || level.type === "free-writing") {
+    return state.selectedValue.trim().length > 0;
+  }
   if (level.type === "syllable-order") return state.builtParts.join("") === level.answer;
   if (level.type === "sentence-order") return normalizeText(state.builtParts.join(" ")) === normalizeText(level.answer);
-  if (level.type === "reading-input") return normalizeText(state.selectedValue) === normalizeText(level.answer);
-  if (level.type === "free-writing") return validateShortSentence(state.selectedValue, level.groups);
   return normalizeText(state.selectedValue) === normalizeText(level.answer);
 }
 
